@@ -1,0 +1,60 @@
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Http, RequestOptions, Headers } from "@angular/http";
+import { NgForm } from "@angular/forms";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs/Observable";
+
+@Component({
+  selector: 'app-shoppingcart',
+  templateUrl: './shoppingcart.component.html',
+  styleUrls: ['./shoppingcart.component.css']
+})
+export class ShoppingcartComponent implements OnInit {
+
+  cartProducts: any[]
+  bill: any
+  visible = false
+
+
+  constructor(private http: Http, private router: Router) { }
+
+  ngOnInit() {
+    this.loadCartList()
+  }
+
+  loadCartList() {
+    let data = localStorage.getItem('cart');
+    // let data = JSON.parse(localStorage.getItem('cart'))
+    if (data != null) {
+      this.cartProducts = JSON.parse(data);
+      this.bill = 0;
+      console.log(this.cartProducts)
+    } else {
+      this.cartProducts = []
+      this.visible = true
+      console.log(this.cartProducts)
+    }
+  }
+
+  removeItem(id) {
+    this.cartProducts.splice(id, 1);
+    if (this.cartProducts.length) {
+      localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+    } else {
+      localStorage.setItem('cart', null);
+    }
+  }
+
+  // updateTotal() {
+  //   this.bill = 0;
+  //   for (let i in this.cartProducts) {
+  //     this.bill = this.bill + this.cartProducts[i].price * this.cartProducts[i].qt;
+  //   }
+  // }
+
+  checkout() {
+    localStorage.removeItem("cart")
+    this.loadCartList()
+  }
+
+}

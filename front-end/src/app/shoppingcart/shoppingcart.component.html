@@ -1,0 +1,83 @@
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()"
+        title="Toggle Navigation Menu">
+        <i class="fa fa-bars"></i>
+      </a>
+      <a href="" routerLink="/home" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+      <a href="" routerLink="/catalogue" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CATALOGUE</a>
+      <a href="" routerLink="/db" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DATABASE</a>
+      <a href="" routerLink="/cart" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Shopping Cart
+        <i class="fa fa-shopping-cart w3-margin-right"></i>
+      </a>
+      <button type="button" (click)="logout()" class="btn btn-warning w3-padding-large w3-hover-red w3-hide-small w3-right" id="logout">Logout</button>
+    </div>
+  </div>
+
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container" style="padding-top: 75px">
+  <table id="cart" class="table table-hover table-condensed">
+    <thead>
+      <tr>
+        <th style="width:50%">Product</th>
+        <th style="width:10%">Price</th>
+        <th style="width:8%">Quantity</th>
+        <th style="width:22%" class="text-center">Subtotal</th>
+        <th style="width:10%"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor = "let e of cartProducts, let i = index">
+      <tr >
+        <td data-th="Product">
+          <div class="row">
+            <!-- gambar -->
+            <div class="col-sm-2 hidden-xs">
+              <img src="{{e.picture}}" alt="" class="img-responsive" />
+            </div>
+            <div class="col-sm-10">
+              <!-- details -->
+              <h4 class="nomargin">{{e.name}}</h4>
+              <p>{{e.brand}}</p>
+            </div>
+          </div>
+        </td>
+        <!-- price and quantity  and subtotal-->
+        <td data-th="Price">Rp. {{e.price}}</td>
+        <td data-th="Quantity">
+          <input type="number" class="form-control text-center" value="1">
+        </td>
+        <td data-th="Subtotal" class="text-center">1.99</td>
+        <td class="actions" data-th="">
+          <button class="btn btn-info btn-sm">
+            <i class="fa fa-refresh"></i>
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="removeItem(i)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <!-- total of all -->
+      <tr class="visible-xs">
+        <td class="text-center">
+          <strong>Total 1.99</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="" class="btn btn-warning" routerLink="/catalogue">
+            <i class="fa fa-angle-left"></i> Continue Shopping</a>
+        </td>
+        <td colspan="2" class="hidden-xs"></td>
+        <td>
+          <a href="#" class="btn btn-success btn-block">Checkout
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
