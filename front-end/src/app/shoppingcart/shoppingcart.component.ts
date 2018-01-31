@@ -12,9 +12,7 @@ import { Observable } from "rxjs/Observable";
 export class ShoppingcartComponent implements OnInit {
 
   cartProducts: any[]
-  bill: any
-  visible = false
-
+  // bill: any;
 
   constructor(private http: Http, private router: Router) { }
 
@@ -27,14 +25,21 @@ export class ShoppingcartComponent implements OnInit {
     // let data = JSON.parse(localStorage.getItem('cart'))
     if (data != null) {
       this.cartProducts = JSON.parse(data);
-      this.bill = 0;
+      // this.bill = 0;
       console.log(this.cartProducts)
     } else {
       this.cartProducts = []
-      this.visible = true
       console.log(this.cartProducts)
     }
   }
+
+  // getSum(index: number) : number {
+  //   let sum = 0;
+  //   for(let i = 0; i < this.cartProducts.length; i++) {
+  //     sum += this.cartProducts[i][index];
+  //   }
+  //   return sum;
+  // }
 
   removeItem(id) {
     this.cartProducts.splice(id, 1);
@@ -47,14 +52,27 @@ export class ShoppingcartComponent implements OnInit {
 
   // updateTotal() {
   //   this.bill = 0;
-  //   for (let i in this.cartProducts) {
-  //     this.bill = this.bill + this.cartProducts[i].price * this.cartProducts[i].qt;
+  //   for(let i in this.cartProducts){
+  //     this.bill = this.bill += (this.cartProducts[i].price * this.cartProducts[i].qt);
   //   }
   // }
 
+
   checkout() {
-    localStorage.removeItem("cart")
-    this.loadCartList()
+    // sessionStorage.removeItem("cartProducts")
+    // localStorage.removeItem("cartProducts")
+    alert("THANK YOU FOR SHOPPING! GOOD BYE!");
+    delete localStorage.cart;
+    delete sessionStorage.cart;
+    // this.cartProducts.splice(0);
+    this.router.navigate['/cart']
+  }
+
+
+  logout() {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.router.navigate['/']
   }
 
 }

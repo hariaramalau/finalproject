@@ -28,27 +28,8 @@ export class CatalogueComponent implements OnInit {
   ngOnInit() {
 
     this.loadProductsList();
-    // this.tokenValidation()
 
   }
-
-  // tokenValidation() {
-
-  //   let header = new Headers({ "Authorization": "Bearer " + this.token });
-  //   let options = new RequestOptions({ headers: header });
-  //   this.http.post("http://localhost:3000/api/validatetoken", {}, options)
-  //     .subscribe(
-  //     result => {
-  //       console.log(result.json())
-  //     },
-  //     error => {
-  //       sessionStorage.removeItem("token");
-  //       sessionStorage.removeItem("username")
-  //     }
-  //     )
-
-  // }
-
 
   loadProductsList() {
 
@@ -126,17 +107,33 @@ export class CatalogueComponent implements OnInit {
       error => {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("username")
-        localStorage.removeItem("token");
-        localStorage.removeItem("username")
+        this.router.navigate['/']
         console.log("logincuy")
       }
       )
 
-
+    //endfunc
   }
 
   updateCartData(cartData) {
     this.cartProducts = cartData
+  }
+
+  // logout() {
+  //   if (sessionStorage != null && localStorage != null) {
+  //     sessionStorage.clear();
+  //     localStorage.clear();
+  //     this.router.navigate['/']
+  //   }
+  //   else {
+  //     this.router.navigate['/'];
+  //   }
+  // }
+
+  logout() {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.router.navigate['/']
   }
 
 }

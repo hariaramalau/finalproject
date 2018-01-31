@@ -17,7 +17,7 @@ export class DatabaseComponent implements OnInit {
   productsCategory = ["all products", "microphone", "headphones"];
   type;
   obj = <any>{};
-  file ;
+  file;
   imagePath = "";
 
   constructor(private http: Http, private router: Router, private actroute: ActivatedRoute) { }
@@ -55,7 +55,7 @@ export class DatabaseComponent implements OnInit {
   }
 
   onSubmit(s: NgForm) {
-console.log(s.value.name);
+    console.log(s.value.name);
     let formData = new FormData();
     formData.append("picture", this.file);
     formData.append("name", s.value.name);
@@ -93,7 +93,7 @@ console.log(s.value.name);
       );
   }
 
-  updateData(t : NgForm) {
+  updateData(t: NgForm) {
 
     let formData = new FormData();
     formData.append("id", t.value._id);
@@ -103,10 +103,11 @@ console.log(s.value.name);
     formData.append("type", t.value.type);
     formData.append("price", t.value.price);
 
-    this.http.put("http://localhost:3000/api/products/",formData)
+    this.http.put("http://localhost:3000/api/products/", formData)
       .subscribe(
       result => {
         this.loadProductsList();
+        this.router.navigate['/catalogue'];
       },
       error => {
         console.log(error);
@@ -117,7 +118,7 @@ console.log(s.value.name);
   editModal(id) {
 
 
-    this.http.get("http://localhost:3000/api/products/"+id)
+    this.http.get("http://localhost:3000/api/products/" + id)
       .subscribe(
       result => {
         this.obj = result.json();
@@ -128,6 +129,12 @@ console.log(s.value.name);
       }
       )
     $('#myModal').modal('show');
+  }
+
+  logout() {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.router.navigate['/']
   }
 
 }

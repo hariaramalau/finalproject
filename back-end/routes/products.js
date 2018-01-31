@@ -38,7 +38,7 @@ module.exports = function () {
         });
     });
 
-    router.post("/", (req, res) => {
+    router.post("/new", (req, res) => {
         if (!req.files.picture) {
             return res.status(400).send("No files were uploaded");
         }
@@ -89,7 +89,6 @@ module.exports = function () {
         }
 
         let image = req.files.picture;
-        // let date = new Date();
         let imageName = req.body.name + ".png";
 
         image.mv("./public/products/" + imageName, (error) => {

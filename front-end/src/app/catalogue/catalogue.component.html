@@ -3,84 +3,71 @@
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<body class="w3-content" style="max-width:1200px">
 
-  <!-- Navbar -->
-  <div class="w3-top">
-    <div class="w3-bar w3-black w3-card">
-      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()"
-        title="Toggle Navigation Menu">
-        <i class="fa fa-bars"></i>
-      </a>
-      <a href="" routerLink="/home" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-      <a href="" routerLink="/catalogue" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CATALOGUE</a>
-      <a href="" routerLink="/db" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DATABASE</a>
-      <a href="" routerLink="/cart" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Shopping Cart
-        <i class="fa fa-shopping-cart w3-margin-right"></i>
-      </a>
-      <button type="button" (click)="logout()" class="btn btn-warning w3-padding-large w3-hover-red w3-hide-small w3-right" id="logout">Logout</button>
-    </div>
-  </div>
+<body>
 
-  <!-- Sidebar/menu -->
-  <div class="w3-sidebar w3-bar-block w3-collapse w3-top" id="mySidebar">
-    <div class="w3-container w3-display-container w3-padding-16">
-      <h3 class="w3-wide">
-        <b style="color: yellow">PRODUCTS</b>
-      </h3>
+    <!-- Navbar -->
+    <div class="w3-top">
+      <div class="w3-bar w3-black w3-card">
+        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()"
+          title="Toggle Navigation Menu">
+          <i class="fa fa-bars"></i>
+        </a>
+        <a href="" routerLink="/home" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+        <a href="" routerLink="/catalogue" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CATALOGUE</a>
+        <a href="" routerLink="/db" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DATABASE</a>
+        <a href="" routerLink="/cart" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Shopping Cart
+          <i class="fa fa-shopping-cart w3-margin-right"></i>
+        </a>
+        <a href="" (click)="logout()" class="btn btn-warning w3-padding-large w3-hover-red w3-hide-small w3-right">Logout</a>
+      </div>
     </div>
 
-    <div class="w3-padding-5 w3-large w3-text-grey" style="font-weight:bold" *ngFor="let e of productsCategory">
-      <a href="#" class="w3-bar-item w3-button" [routerLink]="['/catalogue']" [queryParams]="{ type: e }">{{e}}</a>
+  <!-- Page content -->
+  <div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+    <!-- Sidebar/menu -->
+    <div class="w3-sidebar w3-bar-block w3-collapse w3-top" id="mySidebar">
+      <div class="w3-container w3-display-container w3-padding-16">
+        <h3 class="w3-wide">
+          <b style="color: yellow">PRODUCTS</b>
+        </h3>
+      </div>
+
+      <div class="w3-padding-5 w3-large w3-text-grey" style="font-weight:bold" *ngFor="let e of productsCategory">
+        <a href="#" class="w3-bar-item w3-button" [routerLink]="['/catalogue']" [queryParams]="{ type: e }">{{e}}</a>
+      </div>
+
     </div>
 
-  </div>
-
-
-  <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:250px">
-
-    <!-- Push down content on small screens -->
-    <div class="w3-hide-large" style="margin-top:83px"></div>
 
     <!-- Product grid -->
-    <div class="w3-row w3-grayscale">
-
-      <div class="w3-col l3 s2" *ngFor="let h of productsList, let i = index" style="margin-top:50px">
-
-        <div class="w3-container">
+    <div class="w3-row w3-grayscale" style="margin-left: 200px">
+      <div class="w3-col l3 s6" *ngFor="let h of productsList, let i = index" style="margin-top:50px">
+        <div class="w3-container" id="display">
           <div class="img product">
             <a routerLink="/detail/{{h._id}}">
-              <img src="{{h.picture}}" style="width:50%; height:50%">
+              <img src="{{h.picture}}" style="width:150px;height:150px">
             </a>
           </div>
           <p>{{h.name}}
             <br>
-            <b>{{h.price}}</b>
+            <b>Rp. {{h.price}}</b>
             <br>
             <a routerLink="/detail/{{h._id}}">Details</a>
             <br>
-            <button type="button"  (click)="addToCart(i)" class="btn btn_shop">Add to Cart</button>
-            <!-- </p> -->
+            <button type="button" (click)="addToCart(i)" class="btn btn_shop">Add to Cart</button>
         </div>
       </div>
     </div>
+    <!-- End Product -->
 
-
-    <!-- Footer -->
-    <footer class="w3-padding-64 w3-small w3-center" id="footer">
-      <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a>
-    </footer>
-    <!-- End page content -->
+    <!-- End Page Content -->
   </div>
-
-
-
-  <script>
-
-  </script>
-
 </body>
 
 </html>
