@@ -19,12 +19,47 @@ export class DatabaseComponent implements OnInit {
   obj = <any>{};
   file;
   imagePath = "";
+  // admin = sessionStorage.getItem("userid")
+  token: any;
 
   constructor(private http: Http, private router: Router, private actroute: ActivatedRoute) { }
 
   ngOnInit() {
 
-    this.loadProductsList();
+    if (localStorage.getItem("userid") == '5a87fcad104a6d1510f111d5') {
+      this.token = localStorage.getItem("token")
+      console.log(this.token + " User Authorized Admin Privilege")
+    }
+    else if (sessionStorage.getItem("userid") == '5a87fcad104a6d1510f111d5') {
+      this.token = sessionStorage.getItem("token")
+      console.log(this.token + " User Authorized Admin Privilege")
+    }
+    else {
+      this.router.navigate(['/'])
+      console.log("login dulu bray admin")
+    }
+
+
+    let header = new Headers({ "Authorization": "Bearer " + this.token });
+    let options = new RequestOptions({ headers: header });
+
+    this.http.post("http://localhost:3000/api/validatetoken", {}, options)
+      .subscribe(
+      result => {
+
+        console.log("admin is in");
+        this.loadProductsList();
+      },
+      error => {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("username")
+        this.router.navigate['/']
+        console.log("logincuy")
+      }
+      )
+
+
+
 
   }
 
@@ -96,7 +131,7 @@ export class DatabaseComponent implements OnInit {
   updateData(t: NgForm) {
 
     let formData = new FormData();
-    formData.append("id", t.value._id);
+    formData.append("_id", t.value._id);
     formData.append("picture", this.file);
     formData.append("name", t.value.name);
     formData.append("brand", t.value.brand);
@@ -107,7 +142,7 @@ export class DatabaseComponent implements OnInit {
       .subscribe(
       result => {
         this.loadProductsList();
-        this.router.navigate['/catalogue'];
+        $('#myModal').modal('hide');
       },
       error => {
         console.log(error);
@@ -135,6 +170,8 @@ export class DatabaseComponent implements OnInit {
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigate['/']
+    console.log("logged out. All Storage cleared")
+
   }
 
 }

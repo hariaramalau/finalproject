@@ -49,12 +49,16 @@ export class LoginComponent implements OnInit {
         if (this.checkbox == true) {
           localStorage.setItem("token", result.json().token);
           localStorage.setItem("username", result.json().username)
+          localStorage.setItem("userid", result.json().userid)
         } else {
           sessionStorage.setItem("token", result.json().token);
           sessionStorage.setItem("username", result.json().username)
+          sessionStorage.setItem("userid", result.json().userid)
         }
         this.router.navigate(['/home']);
         console.log("Login success")
+        console.log("userID = " + sessionStorage.getItem("userid"))
+        console.log("userID = " + localStorage.getItem("userid"))
       },
 
       error => {

@@ -95,7 +95,7 @@ export class CatalogueComponent implements OnInit {
           cartData = JSON.parse(data);
 
         }
-        console.log(cartData + "huuhuhuh")
+        console.log(cartData)
         cartData.push(product);
         this.updateCartData(cartData)
 
@@ -119,21 +119,13 @@ export class CatalogueComponent implements OnInit {
     this.cartProducts = cartData
   }
 
-  // logout() {
-  //   if (sessionStorage != null && localStorage != null) {
-  //     sessionStorage.clear();
-  //     localStorage.clear();
-  //     this.router.navigate['/']
-  //   }
-  //   else {
-  //     this.router.navigate['/'];
-  //   }
-  // }
+
 
   logout() {
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigate['/']
+    console.log("logged out. All Storage cleared")
   }
 
 }

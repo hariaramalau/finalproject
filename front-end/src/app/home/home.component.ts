@@ -20,40 +20,7 @@ export class HomeComponent implements OnInit {
     // this.tokenValidation()
   }
 
-  // tokenValidation() {
-
-  //   if (!sessionStorage.getItem("token")) {
-  //     this.token = localStorage.getItem("token")
-  //     console.log(this.token + " local")
-
-  //   }
-  //   if (!localStorage.getItem("token")) {
-  //     this.token = sessionStorage.getItem("token")
-  //     console.log(this.token + " session")
-  //   }
-  //   if (!sessionStorage.getItem("token") && !localStorage.getItem("token")) {
-  //     this.router.navigate(['/']);
-  //   }
-
-  //   let header = new Headers({ "Authorization": "Bearer " + this.token });
-  //   let options = new RequestOptions({ headers: header });
-  //   this.http.post("http://localhost:3000/api/validatetoken", {}, options)
-  //     .subscribe(
-  //     result => {
-  //       console.log(result.json())
-  //       console.log("Logged in")
-  //     },
-  //     error => {
-  //       sessionStorage.removeItem("token");
-  //       sessionStorage.removeItem("username")
-  //       localStorage.removeItem("token");
-  //       localStorage.removeItem("username")
-  //       this.router.navigate(['/'])
-  //       console.log("Not Logged in")
-  //     }
-  //     )
-
-  // }
+ 
 
   loggedIn(token) {
     if (token = null) {
@@ -66,6 +33,7 @@ export class HomeComponent implements OnInit {
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigate['/']
+    console.log("logged out. All Storage cleared")
   }
 }
 

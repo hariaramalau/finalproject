@@ -59,13 +59,11 @@ export class ShoppingcartComponent implements OnInit {
 
 
   checkout() {
-    // sessionStorage.removeItem("cartProducts")
-    // localStorage.removeItem("cartProducts")
-    alert("THANK YOU FOR SHOPPING! GOOD BYE!");
-    delete localStorage.cart;
-    delete sessionStorage.cart;
+    // alert("THANK YOU FOR SHOPPING! GOOD BYE!");
+    localStorage.removeItem("cart");
+    sessionStorage.removeItem("cart");
     // this.cartProducts.splice(0);
-    this.router.navigate['/cart']
+    this.router.navigate(['/home'])
   }
 
 
